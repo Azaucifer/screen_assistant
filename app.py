@@ -1,10 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
+    if request.method == "POST":
+        question = request.form.get("question")
+        return f"You asked: {question}"
+
     return render_template("index.html")
 
 
