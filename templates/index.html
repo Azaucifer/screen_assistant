@@ -16,5 +16,10 @@
         <button type="submit">Ask</button>
     </form>
 
+    {% if response %}
+        <h2>Assistant</h2>
+        <p>{{ response }}</p>
+    {% endif %}
+    
 </body>
 </html>

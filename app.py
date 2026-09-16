@@ -7,7 +7,8 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         question = request.form.get("question")
-        return f"You asked: {question}"
+        response = f"You asked: {question}"
+        return render_template("index.html", question=question, response=response)
 
     return render_template("index.html")
 
