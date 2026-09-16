@@ -8,6 +8,11 @@ load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
+chat = client.chats.create(
+    model="gemini-3.5-flash-lite"
+)
+
+
 app = Flask(__name__)
 
 
@@ -16,11 +21,7 @@ def home():
     if request.method == "POST":
         question = request.form.get("question")
 
-        response = client.models.generate_content(
-            model="gemini-3.5-flash-lite",
-            contents=question,
-        )
-
+        response = chat.send_message(question)
         response = response.text
 
         return render_template("index.html", question=question, response=response)
