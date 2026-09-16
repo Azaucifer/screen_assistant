@@ -1,4 +1,12 @@
+import os
+
+from dotenv import load_dotenv
 from flask import Flask, render_template, request
+from google import genai
+
+load_dotenv()
+
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = Flask(__name__)
 
@@ -7,7 +15,14 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         question = request.form.get("question")
-        response = f"You asked: {question}"
+
+        response = client.models.generate_content(
+            model="gemini-3.5-flash-lite",
+            contents=question,
+        )
+
+        response = response.text
+
         return render_template("index.html", question=question, response=response)
 
     return render_template("index.html")
