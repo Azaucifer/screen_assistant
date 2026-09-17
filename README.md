@@ -2,7 +2,7 @@
 
 A Python-based AI assistant built with Flask and Gemini, with persistent conversation history using SQLite.
 
-The project is being developed incrementally, with the goal of adding screen-aware capabilities such as analyzing screenshots, explaining visible code, and helping understand on-screen errors.
+The project is being developed incrementally toward a screen-aware AI assistant that can analyze screenshots, explain visible code, and help understand on-screen errors.
 
 ## ✨ Features
 
@@ -10,18 +10,20 @@ The project is being developed incrementally, with the goal of adding screen-awa
 * 🤖 Gemini API integration
 * 💬 Conversational AI using Gemini chat sessions
 * 🗄️ Persistent conversation history with SQLite
-* 🎨 HTML/CSS frontend
+* 🔄 Restores conversation context after application restart
+* 📝 Markdown-formatted AI responses
+* 💻 HTML/CSS frontend
 * 🔐 Environment-variable configuration for API credentials
 
 ## 🛠️ Tech Stack
 
-* 🐍 **Python**
-* 🌐 **Flask**
-* 🤖 **Google Gemini API**
-* 🗄️ **SQLite**
-* 🌐 **HTML**
-* 🎨 **CSS**
-* 🔧 **Git & GitHub**
+* 🐍 Python
+* 🌐 Flask
+* 🤖 Google Gemini API
+* 🗄️ SQLite
+* 🌐 HTML
+* 🎨 CSS
+* 🔧 Git & GitHub
 
 ## 📁 Project Structure
 
@@ -61,9 +63,15 @@ Activate it on Windows PowerShell:
 .\.venv\Scripts\Activate.ps1
 ```
 
+On Linux/WSL:
+
+```bash
+source .venv/bin/activate
+```
+
 ### 3️⃣ Install dependencies
 
-```powershell
+```bash
 python -m pip install -r requirements.txt
 ```
 
@@ -77,11 +85,11 @@ GEMINI_API_KEY=your_api_key_here
 
 Replace `your_api_key_here` with your Gemini API key.
 
-> ⚠️ **Never commit your API key to Git.**
+⚠️ **Never commit your API key to Git.**
 
 ### 5️⃣ ▶️ Run the application
 
-```powershell
+```bash
 python app.py
 ```
 
@@ -102,14 +110,16 @@ The current application follows this flow:
    ↓
 🗄️ SQLite
    ↓
-💬 Conversation History
+🔄 Conversation Context
    ↓
-🖥️ Browser
+💬 Browser
 ```
 
 User questions and assistant responses are stored in SQLite.
 
-The Gemini chat session maintains conversational context while the application is running, while SQLite provides persistent storage for the conversation history.
+When the application starts, the stored conversation is loaded and used to reconstruct the Gemini chat history. This allows the assistant to retain conversation context even after the Flask application is restarted.
+
+AI responses are stored as Markdown and converted to HTML for display in the web interface.
 
 ## 🗺️ Roadmap
 
@@ -118,7 +128,7 @@ The Gemini chat session maintains conversational context while the application i
 * [x] 🤖 Gemini API integration
 * [x] 💬 Conversational chat
 * [x] 🗄️ SQLite conversation history
-* [ ] 🔄 Restore Gemini conversation context after application restart
+* [x] 🔄 Restore Gemini conversation context after application restart
 * [ ] 📸 Screen capture
 * [ ] 👁️ Vision-based screen analysis
 * [ ] 💻 Explain code visible on screen
@@ -130,6 +140,8 @@ The Gemini chat session maintains conversational context while the application i
 
 ## 📌 Status
 
-**🚧 Early development**
+🚧 **Early development**
 
-The current version provides the foundation for a Python-based AI screen assistant. Screen-aware and desktop-oriented functionality will be added incrementally.
+The current version provides the foundation for a Python-based AI screen assistant with conversational AI and persistent history.
+
+Screen-aware and desktop-oriented functionality will be added incrementally as the project develops.
